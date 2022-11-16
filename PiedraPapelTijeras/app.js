@@ -1,10 +1,10 @@
-const ROCK = "rock";
-const PAPER = "paper";
-const SCISSORS = "scissors";
+const PIEDRA = "rock";
+const PAPEL = "paper";
+const TIJERAS = "scissors";
 
-const TIE = 0;
-const WIN = 1;
-const LOST = 2;
+const EMPATE = 0;
+const GANO = 1;
+const PERDIO = 2;
 
 let isPlaying = false;
 
@@ -16,13 +16,13 @@ const userImg = document.getElementById("user-img");
 const machineImg = document.getElementById("machine-img");
 
 rockBtn.addEventListener("click", () => {
-    play(ROCK);
+    play(PIEDRA);
 });
 paperBtn.addEventListener("click", () => {
-    play(PAPER);
+    play(PAPEL);
 });
 scissorsBtn.addEventListener("click", () => {
-    play(SCISSORS);
+    play(TIJERAS);
 });
 
 function play(userOption) {
@@ -32,7 +32,7 @@ function play(userOption) {
 
     userImg.src = "img/" + userOption + ".svg";
 
-    resultText.innerHTML = "Chossing!";
+    resultText.innerHTML = "Pensando";
 
     const interval = setInterval(function(){
         const machineOption = calcMachineOption();
@@ -49,14 +49,14 @@ function play(userOption) {
         machineImg.src = "img/" + machineOption + ".svg";
 
         switch (result) {
-            case TIE:
-                resultText.innerHTML = "You have tied!";
+            case EMPATE:
+                resultText.innerHTML = "FUE UN EMPATE!";
                 break;
-            case WIN:
-                resultText.innerHTML = "You win!";
+            case GANO:
+                resultText.innerHTML = "GANASTE!";
                 break;
-            case LOST:
-                resultText.innerHTML = "You lost!";
+            case PERDIO:
+                resultText.innerHTML = "PERDISTE!";
                 break;
         }
         isPlaying = false;
@@ -67,32 +67,32 @@ function calcMachineOption() {
     const number = Math.floor(Math.random() * 3);
     switch (number) {
         case 0:
-            return ROCK;
+            return PIEDRA;
         case 1:
-            return PAPER;
+            return PAPEL;
         case 2:
-            return SCISSORS;
+            return TIJERAS;
     }
 }
 
 function calcResult(userOption, machineOption) {
     if (userOption === machineOption) {
-        return TIE;
+        return EMPATE;
 
-    } else if (userOption === ROCK) {
+    } else if (userOption === PIEDRA) {
 
-        if (machineOption === PAPER) return LOST;
-        if (machineOption === SCISSORS) return WIN;
+        if (machineOption === PAPEL) return PERDIO;
+        if (machineOption === TIJERAS) return GANO;
 
-    } else if (userOption === PAPER) {
+    } else if (userOption === PAPEL) {
 
-        if (machineOption === SCISSORS) return LOST;
-        if (machineOption === ROCK) return WIN;
+        if (machineOption === TIJERAS) return PERDIO;
+        if (machineOption === PIEDRA) return GANO;
 
-    } else if (userOption === SCISSORS) {
+    } else if (userOption === TIJERAS) {
 
-        if (machineOption === ROCK) return LOST;
-        if (machineOption === PAPER) return WIN;
+        if (machineOption === PIEDRA) return PERDIO;
+        if (machineOption === PAPEL) return GANO;
 
     }
 }
