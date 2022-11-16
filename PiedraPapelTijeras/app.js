@@ -1,69 +1,69 @@
-const PIEDRA = "rock";
-const PAPEL = "paper";
-const TIJERAS = "scissors";
+const PIEDRA = "piedra";
+const PAPEL = "papel";
+const TIJERAS = "tijeras";
 
 const EMPATE = 0;
 const GANO = 1;
 const PERDIO = 2;
 
-let isPlaying = false;
+let jugando = false;
 
-const rockBtn = document.getElementById("rock");
-const paperBtn = document.getElementById("paper");
-const scissorsBtn = document.getElementById("scissors");
-const resultText = document.getElementById("start-text");
+const btPiedra = document.getElementById("piedra");
+const btPapel = document.getElementById("papel");
+const btTijeras = document.getElementById("tijeras");
+const txtOpc = document.getElementById("txtOpc");
 const userImg = document.getElementById("user-img");
 const machineImg = document.getElementById("machine-img");
 
-rockBtn.addEventListener("click", () => {
+btPiedra.addEventListener("click", () => {
     play(PIEDRA);
 });
-paperBtn.addEventListener("click", () => {
+btPapel.addEventListener("click", () => {
     play(PAPEL);
 });
-scissorsBtn.addEventListener("click", () => {
+btTijeras.addEventListener("click", () => {
     play(TIJERAS);
 });
 
-function play(userOption) {
-    if(isPlaying) return;
+function play(opcJugador) {
+    if(jugando) return;
 
-    isPlaying = true;
+    jugando = true;
 
-    userImg.src = "img/" + userOption + ".svg";
+    userImg.src = "img/" + opcJugador + ".svg";
 
-    resultText.innerHTML = "Pensando";
+    txtOpc.innerHTML = "Pensando";
 
     const interval = setInterval(function(){
-        const machineOption = calcMachineOption();
-        machineImg.src = "img/" + machineOption + ".svg";
+        const opcMaquina = calcOpcMaquina();
+        machineImg.src = "img/" + opcMaquina + ".svg";
     }, 200);
 
     setTimeout(function () {
 
         clearInterval(interval);
 
-        const machineOption = calcMachineOption();
-        const result = calcResult(userOption, machineOption);
+        const opcMaquina = calcOpcMaquina();
+        const result = calcResult(opcJugador, opcMaquina);
 
-        machineImg.src = "img/" + machineOption + ".svg";
+        machineImg.src = "img/" + opcMaquina + ".svg";
 
         switch (result) {
             case EMPATE:
-                resultText.innerHTML = "FUE UN EMPATE!";
+                txtOpc.innerHTML = "FUE UN EMPATE!";
                 break;
             case GANO:
-                resultText.innerHTML = "GANASTE!";
+                txtOpc.innerHTML = "GANASTE!";
                 break;
             case PERDIO:
-                resultText.innerHTML = "PERDISTE!";
+                txtOpc.innerHTML = "PERDISTE!";
                 break;
         }
-        isPlaying = false;
+        jugando = false;
     }, 2000);
 }
 
-function calcMachineOption() {
+function calcOpcMaquina() {
     const number = Math.floor(Math.random() * 3);
     switch (number) {
         case 0:
@@ -75,24 +75,24 @@ function calcMachineOption() {
     }
 }
 
-function calcResult(userOption, machineOption) {
-    if (userOption === machineOption) {
+function calcResult(opcJugador, opcMaquina) {
+    if (opcJugador === opcMaquina) {
         return EMPATE;
 
-    } else if (userOption === PIEDRA) {
+    } else if (opcJugador === PIEDRA) {
 
-        if (machineOption === PAPEL) return PERDIO;
-        if (machineOption === TIJERAS) return GANO;
+        if (opcMaquina === PAPEL) return PERDIO;
+        if (opcMaquina === TIJERAS) return GANO;
 
-    } else if (userOption === PAPEL) {
+    } else if (opcJugador === PAPEL) {
 
-        if (machineOption === TIJERAS) return PERDIO;
-        if (machineOption === PIEDRA) return GANO;
+        if (opcMaquina === TIJERAS) return PERDIO;
+        if (opcMaquina === PIEDRA) return GANO;
 
-    } else if (userOption === TIJERAS) {
+    } else if (opcJugador === TIJERAS) {
 
-        if (machineOption === PIEDRA) return PERDIO;
-        if (machineOption === PAPEL) return GANO;
+        if (opcMaquina === PIEDRA) return PERDIO;
+        if (opcMaquina === PAPEL) return GANO;
 
     }
 }

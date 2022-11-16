@@ -16,12 +16,18 @@ button{
     height: 100vh;
     max-height: 745px;
     margin: 0 auto;
-    background-color: #ffb74d;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border: 5px solid black;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    /* background-color: #ffb74d; */
+    /* background-image: url("img/card.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+ */
+    background-color: rgb(247, 232, 201);
 }
 
 h1{
@@ -38,16 +44,30 @@ h1{
     width: 40%;
 }
 
-#start-text{
-    font-size: 36px;
+#txtOpc{
+    font-size: 35px;
     padding: 20px;
+    font-weight: bold;
 }
 
-#group-btn{
+#botones{
     display: flex;
     width: 100%;
 }
 
-#group-btn > button > img{
+#botones > button > img{
     width: 100%;
+}
+body{
+    background-image: url("img/bg.jpg");
+    background-size: cover;
+}
+
+.foot{
+    text-align: end;
+}
+
+.foot-txt{
+    text-decoration: none;
+    color: aliceblue;
 }
